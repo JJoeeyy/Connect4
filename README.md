@@ -1,15 +1,16 @@
-# Connect Four Template
+# Connect4
+## Verwendete Features
+Ich habe einen funktionierenden MinMax und AlphaBeta programmiert.
+Mein isWinning ist korrekt und wurde mit passenden for Schleifen möglichst kurz gehalten.
+Dank einer optimal, zur evaluate Funktion angepassten, possibleMove Reihenfolge,
+wurde mein AlphaBeta sehr viel schneller und effizienter.
+Dank einem kleinen output kann man sehen wie lange der AlphaBeta pro Zug gebraucht hatte, 
+so sieht man zum Beispiel, dass er bei einer Tiefe von 12 immer unter einer Sekunde hat.
 
-A start of a project implementing a variant of the game "Connect Four".
 
-## Mission
+## Ausblick
+Wenn ich noch etwas mehr Zeit gehabt hätte, hätte ich als Erstes mit einem BitBoard versucht,
+das Programm zu optimieren und danach noch weiter versuchen die Moves schneller zu machen.
 
-1. Extend the existing code such that the GreedyPlayer works.
-2. Implement a strong Opponent using MinMax/Negamax with fixed depth (like 10).
-3. Implement a perfect Player and optimize it for speed.
-
-## Resources
-
-- https://de.wikipedia.org/wiki/Minimax-Algorithmus#Implementierung
-- https://de.wikipedia.org/wiki/Alpha-Beta-Suche#Implementierung
-- https://en.wikipedia.org/wiki/Zobrist_hashing
+## Selbsteinschätzung
+5.5

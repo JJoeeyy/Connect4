@@ -54,70 +54,14 @@ public class Connect4ArenaMain {
             }
         }
 
-
-        return b[0] == color && b[0] == b[1] && b[1] == b[2] && b[2] == b[3] ||
-                b[1] == color && b[1] == b[2] && b[2] == b[3] && b[3] == b[4] ||
-                b[2] == color && b[2] == b[3] && b[3] == b[4] && b[4] == b[5] ||
-                b[3] == color && b[3] == b[4] && b[4] == b[5] && b[5] == b[6] ||
-
-                b[7] == color && b[7] == b[8] && b[8] == b[9] && b[9] == b[10] ||
-                b[8] == color && b[8] == b[9] && b[9] == b[10] && b[10] == b[11] ||
-                b[9] == color && b[9] == b[10] && b[10] == b[11] && b[11] == b[12] ||
-                b[10] == color && b[10] == b[11] && b[11] == b[12] && b[12] == b[13] ||
-
-                b[14] == color && b[14] == b[15] && b[15] == b[16] && b[16] == b[17] ||
-                b[15] == color && b[15] == b[16] && b[16] == b[17] && b[17] == b[18] ||
-                b[16] == color && b[16] == b[17] && b[17] == b[18] && b[18] == b[19] ||
-                b[17] == color && b[17] == b[18] && b[18] == b[19] && b[19] == b[20] ||
-
-                b[21] == color && b[21] == b[22] && b[22] == b[23] && b[23] == b[24] ||
-                b[22] == color && b[22] == b[23] && b[23] == b[24] && b[24] == b[25] ||
-                b[23] == color && b[23] == b[24] && b[24] == b[25] && b[25] == b[26] ||
-                b[24] == color && b[24] == b[25] && b[25] == b[26] && b[26] == b[27];
-        // @formatter:on
-    }
-
-    static boolean hasThree(Stone[] b, Stone color) {
-        // @formatter:off
-
-        for (int i = 0; i < 7; i++) {
-            if (b[i] == color && b[i] == b[i + 7] && b[i + 7] == b[i + 14] && b[i + 14] == b[i + 21]) {
-                return true;
+        for (int i = 0; i < 22; i+=7) {
+            for (int j = i; j < i+4; j++) {
+                if (b[j] == color && b[j] == b[j+1] && b[j+1] == b[j+2] && b[j+2] == b[j+3] ){
+                    return true;
+                }
             }
         }
-
-        for (int i = 0; i < 4; i++) {
-            if (b[i] == color && b[i] == b[i + 8] && b[i + 8] == b[i + 16] && b[i + 16] == b[i + 24]) {
-                return true;
-            }
-        }
-
-        for (int i = 3; i < 7; i++) {
-            if (b[i] == color && b[i] == b[i + 6] && b[i + 6] == b[i + 12] && b[i + 12] == b[i + 18]) {
-                return true;
-            }
-        }
-
-
-        return b[0] == color && b[0] == b[1] && b[1] == b[2] && b[2] == b[3] ||
-                b[1] == color && b[1] == b[2] && b[2] == b[3] && b[3] == b[4] ||
-                b[2] == color && b[2] == b[3] && b[3] == b[4] && b[4] == b[5] ||
-                b[3] == color && b[3] == b[4] && b[4] == b[5] && b[5] == b[6] ||
-
-                b[7] == color && b[7] == b[8] && b[8] == b[9] && b[9] == b[10] ||
-                b[8] == color && b[8] == b[9] && b[9] == b[10] && b[10] == b[11] ||
-                b[9] == color && b[9] == b[10] && b[10] == b[11] && b[11] == b[12] ||
-                b[10] == color && b[10] == b[11] && b[11] == b[12] && b[12] == b[13] ||
-
-                b[14] == color && b[14] == b[15] && b[15] == b[16] && b[16] == b[17] ||
-                b[15] == color && b[15] == b[16] && b[16] == b[17] && b[17] == b[18] ||
-                b[16] == color && b[16] == b[17] && b[17] == b[18] && b[18] == b[19] ||
-                b[17] == color && b[17] == b[18] && b[18] == b[19] && b[19] == b[20] ||
-
-                b[21] == color && b[21] == b[22] && b[22] == b[23] && b[23] == b[24] ||
-                b[22] == color && b[22] == b[23] && b[23] == b[24] && b[24] == b[25] ||
-                b[23] == color && b[23] == b[24] && b[24] == b[25] && b[25] == b[26] ||
-                b[24] == color && b[24] == b[25] && b[25] == b[26] && b[26] == b[27];
+        return false;
         // @formatter:on
     }
 
@@ -286,6 +230,7 @@ public class Connect4ArenaMain {
             initialFreeFields = depth;
         }
 
+        // the default depth is 8
         public MinMaxPlayer() {
             initialFreeFields = 8;
         }
@@ -297,6 +242,7 @@ public class Connect4ArenaMain {
         }
 
         private long getScore(Stone myColor, int depth) {
+            // finds all possible move
             possibleMoves = new ArrayList<>();
             for (int i = 0; i < 7; i++) {
                 for (int j = i; j < 27; j += 7) {
@@ -340,6 +286,7 @@ public class Connect4ArenaMain {
         }
 
         private int evaluate(Stone myColor) {
+            // point system
             int[] points = {
                     3, 4, 6, 7, 6, 4, 3,
                     2, 4, 6, 7, 6, 4, 2,
@@ -347,6 +294,7 @@ public class Connect4ArenaMain {
                     3, 4, 6, 7, 6, 4, 3};
 
             int totalPoints = 0;
+            // adds the points together
             for (int i = 0; i < 28; i++) {
                 if (board[i] == myColor) {
                     totalPoints += points[i];
@@ -378,21 +326,34 @@ public class Connect4ArenaMain {
 
         @Override
         int play() {
+            // start of a move
             long startTime = System.currentTimeMillis();
 
             alphabeta(board, myColor, initialFreeFields, -100000, 100000);
 
+            // end of a move
             long endTime = System.currentTimeMillis();
+            // the time the move had to finish
             long time = endTime - startTime;
+            // prints how long the move was in milliseconds
             System.out.println("Time in milliseconds: " + time);
 
             return bestMove;
         }
 
         private long alphabeta(Stone[] board, Stone myColor, int depth, long alpha, long beta) {
+            // finds all possible moves
             possibleMoves = new ArrayList<>();
+            int row = 3;
             for (int i = 0; i < 7; i++) {
-                for (int j = i; j < 28; j += 7) {
+                // with this little hack it looks from the inside out
+                // now it makes the alphaBeta much faster
+                if (i % 2 == 0) {
+                    row += i;
+                } else {
+                    row -= i;
+                }
+                for (int j = row; j < 28; j += 7) {
                     if (board[j] == null) {
                         possibleMoves.add(j);
                         break;
@@ -401,16 +362,20 @@ public class Connect4ArenaMain {
             }
 
             nodeCount++;
+
+            // check if opponent wins the game
             if (isWinning(board, myColor.opponent())) {
                 return -10000;  // we already lost :(
             }
 
+            // evaluate if depth is zero or there are no more possible moves
             if (depth == 0 || possibleMoves.size() == 0) {
                 return evaluate(myColor, board);
             }
 
             long maxWert = alpha;
 
+            // iterates throw all possible moves
             for (int i : possibleMoves) {
                 board[i] = myColor; // play a stone
 
@@ -425,13 +390,14 @@ public class Connect4ArenaMain {
                     }
                 }
                 if (maxWert >= beta) {
-                    break;
+                    break; // alphabeta pruning
                 }
             }
             return maxWert;
         }
 
         private int evaluate(Stone myColor, Stone[] board) {
+            // point system
             int[] points = {
                     3, 4, 6, 7, 6, 4, 3,
                     2, 4, 6, 7, 6, 4, 2,
@@ -439,6 +405,8 @@ public class Connect4ArenaMain {
                     3, 4, 6, 7, 6, 4, 3};
 
             int totalPoints = 0;
+
+            // add the points together
             for (int i = 0; i < 28; i++) {
                 if (board[i] == myColor) {
                     totalPoints += points[i];
