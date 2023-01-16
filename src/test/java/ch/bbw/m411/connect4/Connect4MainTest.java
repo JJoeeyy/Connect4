@@ -61,4 +61,46 @@ class Connect4MainTest implements WithAssertions {
 		var blue = new Connect4ArenaMain.GreedyPlayer();
 		assertThat(newInstance().play(red, blue)).isSameAs(red);
 	}
+
+	@Test
+	void greedyVsMinMax() {
+		var red = new Connect4ArenaMain.GreedyPlayer();
+		var blue = new Connect4ArenaMain.MinMaxPlayer();
+		assertThat(newInstance().play(red, blue)).isSameAs(blue);
+	}
+
+	@Test
+	void MinMaxVsMinMax() {
+		var red = new Connect4ArenaMain.MinMaxPlayer(15);
+		var blue = new Connect4ArenaMain.MinMaxPlayer(2);
+		assertThat(newInstance().play(red, blue)).isSameAs(red);
+	}
+
+	@Test
+	void MinMaxVsMinMaxEqual() {
+		var red = new Connect4ArenaMain.MinMaxPlayer();
+		var blue = new Connect4ArenaMain.MinMaxPlayer();
+		assertThat(newInstance().play(red, blue)).isSameAs(red);
+	}
+
+	@Test
+	void AlphaBetaVsAlphaBetaEqual() {
+		var red = new Connect4ArenaMain.AlphaBetaPlayer();
+		var blue = new Connect4ArenaMain.AlphaBetaPlayer();
+		assertThat(newInstance().play(red, blue)).isSameAs(null);
+	}
+
+	@Test
+	void AlphaBetaVsAlphaBeta() {
+		var red = new Connect4ArenaMain.AlphaBetaPlayer(6);
+		var blue = new Connect4ArenaMain.AlphaBetaPlayer(4);
+		assertThat(newInstance().play(red, blue)).isSameAs(red);
+	}
+
+	@Test
+	void AlphaBetaVsAlphaBetaHigh() {
+		var red = new Connect4ArenaMain.AlphaBetaPlayer(4);
+		var blue = new Connect4ArenaMain.AlphaBetaPlayer(11);
+		assertThat(newInstance().play(red, blue)).isSameAs(blue);
+	}
 }
